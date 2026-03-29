@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo1.DashboardController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label fx:id="welcomeLabel" text="Welcome" style="-fx-font-size: 18;"/>
+
+    <Label text="Today's Kindness Task:" style="-fx-font-size: 16;"/>
+
+    <Label fx:id="taskLabel" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+    <StackPane>
+        <GridPane fx:id="grid"
+                  hgap="10"
+                  vgap="10"
+                  alignment="CENTER"
+                  prefWidth="600"
+                  prefHeight="300"/>
+    </StackPane>
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Generate Task" onAction="#generateTask" prefWidth="140"/>
+        <Button text="Complete Task" onAction="#completeTask" prefWidth="140"/>
+        <Button text="Fail Task" onAction="#failTask" prefWidth="140"/>
+        <Button text="Reset" onAction="#resetProgress" prefWidth="100"
+                style="-fx-background-color: #ffcccc; -fx-text-fill: #cc0000;"/>
+    </HBox>
+
+</VBox>
