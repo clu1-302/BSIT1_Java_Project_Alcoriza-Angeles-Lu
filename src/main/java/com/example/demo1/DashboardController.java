@@ -3,69 +3,58 @@ package com.example.demo1;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class DashboardController {
 
-    @FXML
-    private GridPane grid;
-
-    @FXML
-    private Label welcomeLabel;
-
-    @FXML
-    private Label taskLabel;
+    @FXML private GridPane grid;
+    @FXML private Label welcomeLabel;
+    @FXML private Label taskLabel;
 
     private Label[][] cells = new Label[3][10];
-
     private String currentUser = "guest";
-    private int day = 0; // ✅ start at 0 (IMPORTANT)
+    private int day = 0;
 
     private final String[] tasks = {
-            "Compliment someone sincerely",
-            "Help someone carry something",
-            "Thank a teacher",
-            "Give someone encouragement",
-            "Share food with a friend",
-            "Hold the door for someone",
-            "Send a kind message",
-            "Help someone study"
+            "Compliment someone sincerely", "Help someone carry something",
+            "Thank a teacher", "Give someone encouragement",
+            "Share food with a friend", "Hold the door for someone",
+            "Send a kind message", "Help someone study"
     };
 
     @FXML
     public void initialize() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 10; col++) {
-
-                Label cell = new Label(""); // cleaner UI
+                Label cell = new Label("");
                 applyBaseCellStyle(cell);
-
                 grid.add(cell, col, row);
                 cells[row][col] = cell;
             }
         }
-
-        loadProgress(); // load saved data
+        loadProgress();
     }
 
     private void applyBaseCellStyle(Label cell) {
+        cell.setText(""); // Clear text
         cell.setStyle(
                 "-fx-border-color: black;" +
                         "-fx-padding: 20;" +
                         "-fx-font-size: 20;" +
                         "-fx-min-width: 50;" +
                         "-fx-min-height: 50;" +
-                        "-fx-alignment: center;"
+                        "-fx-alignment: center;" +
+                        "-fx-background-color: transparent;"
         );
     }
 
     @FXML
     public void generateTask() {
         Random random = new Random();
-        int index = random.nextInt(tasks.length);
-        taskLabel.setText(tasks[index]);
+        taskLabel.setText(tasks[random.nextInt(tasks.length)]);
     }
 
     public void setUsername(String username) {
@@ -82,10 +71,8 @@ public class DashboardController {
             taskLabel.setText("Grid is FULL! ⚠️");
             return;
         }
-
         updateGridCell("C", "lightgreen");
         saveProgress("C");
-
         day++;
         taskLabel.setText("Task Completed! ✅");
     }
@@ -96,18 +83,35 @@ public class DashboardController {
             taskLabel.setText("Grid is FULL! ⚠️");
             return;
         }
-
         updateGridCell("F", "lightcoral");
         saveProgress("F");
-
         day++;
         taskLabel.setText("Task Failed! ❌");
+    }
+
+    @FXML
+    public void undoTask() {
+        if (day <= 0) {
+            taskLabel.setText("Nothing to undo! ↩️");
+            return;
+        }
+
+        // 1. Move back one day
+        day--;
+
+        // 2. Clear the cell in UI
+        int row = day / 10;
+        int col = day % 10;
+        applyBaseCellStyle(cells[row][col]);
+
+        // 3. Remove last line from file
+        removeLastLineFromFile();
+        taskLabel.setText("Last action undone! ↩️");
     }
 
     private void updateGridCell(String text, String color) {
         int row = day / 10;
         int col = day % 10;
-
         cells[row][col].setText(text);
         cells[row][col].setStyle(
                 "-fx-background-color: " + color + ";" +
@@ -122,10 +126,35 @@ public class DashboardController {
 
     private void saveProgress(String status) {
         try (FileWriter writer = new FileWriter("progress_" + currentUser + ".txt", true)) {
-            writer.write(status + "\n"); // ✅ FIXED (no "Day X")
+            writer.write(status + "\n");
         } catch (IOException e) {
             taskLabel.setText("Error saving progress");
         }
+    }
+
+    private void removeLastLineFromFile() {
+        File file = new File("progress_" + currentUser + ".txt");
+        if (!file.exists()) return;
+
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) { e.printStackTrace(); }
+
+        // Remove the last item if list isn't empty
+        if (!lines.isEmpty()) {
+            lines.remove(lines.size() - 1);
+        }
+
+        // Rewrite the file with the remaining lines
+        try (FileWriter writer = new FileWriter(file, false)) { // 'false' overwrites
+            for (String l : lines) {
+                writer.write(l + "\n");
+            }
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
     private void loadProgress() {
@@ -135,44 +164,34 @@ public class DashboardController {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             int index = 0;
-
             while ((line = reader.readLine()) != null && index < 30) {
-
                 int row = index / 10;
                 int col = index % 10;
-
-                if (line.equals("C")) {
-                    cells[row][col].setText("C");
-                    cells[row][col].setStyle("-fx-background-color: lightgreen; -fx-border-color: black;");
-                } else if (line.equals("F")) {
-                    cells[row][col].setText("F");
-                    cells[row][col].setStyle("-fx-background-color: lightcoral; -fx-border-color: black;");
-                }
-
+                String color = line.equals("C") ? "lightgreen" : "lightcoral";
+                cells[row][col].setText(line);
+                cells[row][col].setStyle(
+                        "-fx-background-color: " + color + ";" +
+                                "-fx-border-color: black;" +
+                                "-fx-padding: 20;" +
+                                "-fx-font-size: 20;" +
+                                "-fx-min-width: 50;" +
+                                "-fx-min-height: 50;" +
+                                "-fx-alignment: center;");
                 index++;
             }
-
-            day = index; // ✅ FIXED
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            day = index;
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
     @FXML
     public void resetProgress() {
         File file = new File("progress_" + currentUser + ".txt");
-        if (file.exists()) {
-            file.delete();
-        }
-
+        if (file.exists()) file.delete();
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 10; col++) {
-                cells[row][col].setText("");
                 applyBaseCellStyle(cells[row][col]);
             }
         }
-
         day = 0;
         taskLabel.setText("Progress reset! 🔄");
     }

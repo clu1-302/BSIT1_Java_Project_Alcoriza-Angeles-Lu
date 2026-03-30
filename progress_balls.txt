@@ -1,10 +1,2 @@
 C
 F
-C
-C
-C
-C
-C
-C
-F
-F

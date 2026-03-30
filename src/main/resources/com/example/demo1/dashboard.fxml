@@ -27,11 +27,13 @@
                   prefHeight="300"/>
     </StackPane>
 
-    <HBox spacing="15" alignment="CENTER">
-        <Button text="Generate Task" onAction="#generateTask" prefWidth="140"/>
-        <Button text="Complete Task" onAction="#completeTask" prefWidth="140"/>
-        <Button text="Fail Task" onAction="#failTask" prefWidth="140"/>
-        <Button text="Reset" onAction="#resetProgress" prefWidth="100"
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Generate Task" onAction="#generateTask" prefWidth="120"/>
+        <Button text="Complete Task" onAction="#completeTask" prefWidth="120"/>
+        <Button text="Fail Task" onAction="#failTask" prefWidth="100"/>
+        <Button text="Undo" onAction="#undoTask" prefWidth="80"
+                style="-fx-background-color: #f0f0f0; -fx-border-color: #cccccc;"/>
+        <Button text="Reset" onAction="#resetProgress" prefWidth="80"
                 style="-fx-background-color: #ffcccc; -fx-text-fill: #cc0000;"/>
     </HBox>
 
