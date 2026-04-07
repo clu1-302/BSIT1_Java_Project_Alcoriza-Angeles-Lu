@@ -6,22 +6,53 @@
 
 <VBox alignment="CENTER" spacing="15"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demo1.HelloController">
+      fx:controller="com.example.demo1.HelloController"
+      style="-fx-background-color: linear-gradient(to bottom right, #1b2838, #0f1a24);
+             -fx-font-family: 'Segoe UI', 'Roboto', sans-serif;">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Kindness Challenge"/>
+    <Label text="Kindness Challenge"
+           style="-fx-text-fill: #c7d5e0;
+                  -fx-font-size: 28px;
+                  -fx-font-weight: bold;
+                  -fx-padding: 0 0 20 0;"/>
 
-    <TextField fx:id="usernameField" promptText="Username"/>
+    <TextField fx:id="usernameField" promptText="Account name"
+               style="-fx-background-color: #2a475e;
+                      -fx-background-radius: 4;
+                      -fx-text-fill: white;
+                      -fx-prompt-text-fill: #8f98a0;
+                      -fx-font-size: 14px;
+                      -fx-padding: 10;"/>
 
-    <PasswordField fx:id="passwordField" promptText="Password"/>
+    <PasswordField fx:id="passwordField" promptText="Password"
+                   style="-fx-background-color: #2a475e;
+                          -fx-background-radius: 4;
+                          -fx-text-fill: white;
+                          -fx-prompt-text-fill: #8f98a0;
+                          -fx-font-size: 14px;
+                          -fx-padding: 10;"/>
 
-    <Button text="Login" onAction="#handleLogin"/>
+    <Button text="Login" onAction="#handleLogin"
+            style="-fx-background-color: #5c7e10;
+                   -fx-text-fill: white;
+                   -fx-background-radius: 4;
+                   -fx-font-weight: bold;
+                   -fx-font-size: 15px;
+                   -fx-padding: 10 20;"/>
 
-    <Button text="Register" onAction="#handleRegister"/>
+    <Button text="Register" onAction="#handleRegister"
+            style="-fx-background-color: #2a475e;
+                   -fx-text-fill: #c7d5e0;
+                   -fx-background-radius: 4;
+                   -fx-font-size: 14px;
+                   -fx-padding: 10 20;"/>
 
-    <Label fx:id="messageLabel"/>
+    <Label fx:id="messageLabel"
+           style="-fx-text-fill: #8f98a0;
+                  -fx-font-size: 12px;"/>
 
 </VBox>
