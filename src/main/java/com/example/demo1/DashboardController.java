@@ -22,7 +22,19 @@ public class DashboardController {
             "Compliment someone sincerely", "Help someone carry something",
             "Thank a teacher", "Give someone encouragement",
             "Share food with a friend", "Hold the door for someone",
-            "Send a kind message", "Help someone study"
+            "Send a kind message", "Help someone study",
+            "Smile at a stranger", "Listen to someone without interrupting",
+            "Offer help to a classmate", "Pick up litter around you",
+            "Say sorry if you made a mistake", "Cheer someone up",
+            "Give up your seat for someone", "Write a thank you note",
+            "Help clean a shared space", "Invite someone to join you",
+            "Be patient in a long line", "Say something positive to yourself",
+            "Help someone with directions", "Encourage someone who is struggling",
+            "Donate something you no longer use", "Check in on a friend",
+            "Respect someone’s opinion", "Give genuine praise",
+            "Offer to help at home", "Let someone go first",
+            "Be kind to someone having a bad day", "Say good morning to people"
+
     };
 
     @FXML
