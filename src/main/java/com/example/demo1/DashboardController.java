@@ -18,6 +18,9 @@ public class DashboardController {
     private String currentUser = "guest";
     private int day = 0;
 
+    // ✅ NEW: Task state checker
+    private boolean hasActiveTask = false;
+
     private final String[] tasks = {
             "Compliment someone sincerely", "Help someone carry something",
             "Thank a teacher", "Give someone encouragement",
@@ -34,7 +37,6 @@ public class DashboardController {
             "Respect someone’s opinion", "Give genuine praise",
             "Offer to help at home", "Let someone go first",
             "Be kind to someone having a bad day", "Say good morning to people"
-
     };
 
     @FXML
@@ -51,7 +53,7 @@ public class DashboardController {
     }
 
     private void applyBaseCellStyle(Label cell) {
-        cell.setText(""); // Clear text
+        cell.setText("");
         cell.setStyle(
                 "-fx-border-color: black;" +
                         "-fx-padding: 20;" +
@@ -67,6 +69,7 @@ public class DashboardController {
     public void generateTask() {
         Random random = new Random();
         taskLabel.setText(tasks[random.nextInt(tasks.length)]);
+        hasActiveTask = true; // ✅ allow complete/fail
     }
 
     public void setUsername(String username) {
@@ -79,26 +82,44 @@ public class DashboardController {
 
     @FXML
     public void completeTask() {
+        // ❌ BLOCK if no task generated
+        if (!hasActiveTask) {
+            taskLabel.setText("Generate a task first! ⚠️");
+            return;
+        }
+
         if (day >= 30) {
             taskLabel.setText("Grid is FULL! ⚠️");
             return;
         }
+
         updateGridCell("C", "lightgreen");
         saveProgress("C");
         day++;
         taskLabel.setText("Task Completed! ✅");
+
+        hasActiveTask = false; // 🔒 reset
     }
 
     @FXML
     public void failTask() {
+        // ❌ BLOCK if no task generated
+        if (!hasActiveTask) {
+            taskLabel.setText("Generate a task first! ⚠️");
+            return;
+        }
+
         if (day >= 30) {
             taskLabel.setText("Grid is FULL! ⚠️");
             return;
         }
+
         updateGridCell("F", "lightcoral");
         saveProgress("F");
         day++;
         taskLabel.setText("Task Failed! ❌");
+
+        hasActiveTask = false; // 🔒 reset
     }
 
     @FXML
@@ -108,17 +129,16 @@ public class DashboardController {
             return;
         }
 
-        // 1. Move back one day
         day--;
 
-        // 2. Clear the cell in UI
         int row = day / 10;
         int col = day % 10;
         applyBaseCellStyle(cells[row][col]);
 
-        // 3. Remove last line from file
         removeLastLineFromFile();
         taskLabel.setText("Last action undone! ↩️");
+
+        hasActiveTask = false; // 🔒 force regenerate task
     }
 
     private void updateGridCell(String text, String color) {
@@ -156,13 +176,11 @@ public class DashboardController {
             }
         } catch (IOException e) { e.printStackTrace(); }
 
-        // Remove the last item if list isn't empty
         if (!lines.isEmpty()) {
             lines.remove(lines.size() - 1);
         }
 
-        // Rewrite the file with the remaining lines
-        try (FileWriter writer = new FileWriter(file, false)) { // 'false' overwrites
+        try (FileWriter writer = new FileWriter(file, false)) {
             for (String l : lines) {
                 writer.write(l + "\n");
             }
@@ -199,12 +217,15 @@ public class DashboardController {
     public void resetProgress() {
         File file = new File("progress_" + currentUser + ".txt");
         if (file.exists()) file.delete();
+
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 10; col++) {
                 applyBaseCellStyle(cells[row][col]);
             }
         }
+
         day = 0;
         taskLabel.setText("Progress reset! 🔄");
+        hasActiveTask = false;
     }
 }
