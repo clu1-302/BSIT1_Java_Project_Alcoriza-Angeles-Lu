@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<VBox alignment="CENTER" spacing="20"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo1.IntroController"
+      style="-fx-background-color: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);">
+
+    <padding>
+        <Insets top="40" right="20" bottom="40" left="20"/>
+    </padding>
+
+    <Label text="Kindness Challenge"
+           style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" />
+
+    <Button fx:id="continueButton"
+            text="Continue"
+            onAction="#handleContinue"
+            style="-fx-background-color: #7ED957; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" />
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Credits"
+                onAction="#showCredits"
+                style="-fx-background-color: #3b5998; -fx-text-fill: white;" />
+
+        <Button text="About"
+                onAction="#showAbout"
+                style="-fx-background-color: #555; -fx-text-fill: white;" />
+    </HBox>
+
+</VBox>

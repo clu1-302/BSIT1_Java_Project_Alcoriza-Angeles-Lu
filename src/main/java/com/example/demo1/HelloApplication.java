@@ -9,13 +9,11 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/com/example/demo1/hello-view.fxml")
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                getClass().getResource("/com/example/demo1/intro.fxml")
         );
 
-        Scene scene = new Scene(loader.load(), 400, 600);
-
+        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setTitle("Kindness App");
         stage.setScene(scene);
         stage.show();
