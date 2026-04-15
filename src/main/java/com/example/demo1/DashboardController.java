@@ -18,7 +18,7 @@ public class DashboardController {
     private String currentUser = "guest";
     private int day = 0;
 
-    // ✅ NEW: Task state checker
+
     private boolean hasActiveTask = false;
 
     private final String[] tasks = {
@@ -69,7 +69,7 @@ public class DashboardController {
     public void generateTask() {
         Random random = new Random();
         taskLabel.setText(tasks[random.nextInt(tasks.length)]);
-        hasActiveTask = true; // ✅ allow complete/fail
+        hasActiveTask = true;
     }
 
     public void setUsername(String username) {
@@ -82,7 +82,7 @@ public class DashboardController {
 
     @FXML
     public void completeTask() {
-        // ❌ BLOCK if no task generated
+
         if (!hasActiveTask) {
             taskLabel.setText("Generate a task first! ⚠️");
             return;
@@ -103,7 +103,7 @@ public class DashboardController {
 
     @FXML
     public void failTask() {
-        // ❌ BLOCK if no task generated
+
         if (!hasActiveTask) {
             taskLabel.setText("Generate a task first! ⚠️");
             return;
@@ -138,7 +138,7 @@ public class DashboardController {
         removeLastLineFromFile();
         taskLabel.setText("Last action undone! ↩️");
 
-        hasActiveTask = false; // 🔒 force regenerate task
+        hasActiveTask = false;
     }
 
     private void updateGridCell(String text, String color) {

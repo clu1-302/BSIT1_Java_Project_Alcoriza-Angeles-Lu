@@ -9,7 +9,7 @@
             style="-fx-background-color: linear-gradient(to bottom right, #1b2838, #0f1a24);
                    -fx-font-family: 'Segoe UI', 'Roboto', sans-serif;">
 
-    <!-- Top Bar -->
+
     <top>
         <HBox alignment="CENTER_LEFT" spacing="10"
               style="-fx-background-color: #171a21;
@@ -25,12 +25,12 @@
         </HBox>
     </top>
 
-    <!-- Main Content -->
+
     <center>
         <VBox alignment="TOP_CENTER" spacing="20"
               style="-fx-padding: 20;">
 
-            <!-- Task Card -->
+
             <VBox spacing="10" alignment="CENTER"
                   style="-fx-background-color: #171a21;
                          -fx-background-radius: 8;
@@ -44,7 +44,7 @@
                               -fx-font-size: 13px;" />
             </VBox>
 
-            <!-- Grid Area -->
+
             <StackPane style="-fx-background-color: #171a21;
                               -fx-background-radius: 8;
                               -fx-padding: 15;">
@@ -56,10 +56,10 @@
                           prefHeight="300"/>
             </StackPane>
 
-            <!-- Buttons -->
+
             <HBox spacing="10" alignment="CENTER">
 
-                <!-- Generate -->
+
                 <Button text="Generate" onAction="#generateTask"
                         style="-fx-background-color: #2a475e;
                                -fx-text-fill: #c7d5e0;
@@ -81,7 +81,7 @@
                     </style>
                 </Button>
 
-                <!-- Complete -->
+
                 <Button text="Complete" onAction="#completeTask"
                         style="-fx-background-color: #5c7e10;
                                -fx-text-fill: white;
@@ -102,7 +102,7 @@
                     </style>
                 </Button>
 
-                <!-- Fail -->
+
                 <Button text="Fail" onAction="#failTask"
                         style="-fx-background-color: #8b1a1a;
                                -fx-text-fill: white;
@@ -123,7 +123,7 @@
                     </style>
                 </Button>
 
-                <!-- Undo -->
+
                 <Button text="Undo" onAction="#undoTask"
                         style="-fx-background-color: #2a475e;
                                -fx-text-fill: #c7d5e0;
@@ -145,7 +145,7 @@
                     </style>
                 </Button>
 
-                <!-- Reset -->
+
                 <Button text="Reset" onAction="#resetProgress"
                         style="-fx-background-color: #b8860b;
                                -fx-text-fill: white;

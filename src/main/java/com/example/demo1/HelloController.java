@@ -19,7 +19,7 @@ public class HelloController {
     @FXML private PasswordField passwordField;
     @FXML private Label messageLabel;
 
-    // Use a fixed file name that points to the project root
+
     private final String DATABASE_FILE = "users.txt";
 
     @FXML
@@ -38,7 +38,7 @@ public class HelloController {
             return;
         }
 
-        // Try-with-resources ensures the scanner closes automatically
+
         try (Scanner scanner = new Scanner(file)) {
             boolean found = false;
 
@@ -51,7 +51,7 @@ public class HelloController {
                     String storedUser = parts[0].trim();
                     String storedPass = parts[1].trim();
 
-                    // Using equalsIgnoreCase for username makes login easier
+
                     if (storedUser.equalsIgnoreCase(username) && storedPass.equals(password)) {
                         found = true;
                         navigateToDashboard(username);
@@ -80,12 +80,12 @@ public class HelloController {
             return;
         }
 
-        // 'true' means append to the file instead of overwriting it
+
         try (FileWriter writer = new FileWriter(DATABASE_FILE, true)) {
             writer.write(username + "," + password + System.lineSeparator());
             messageLabel.setText("User Registered! You can now login.");
 
-            // Clear fields after success
+
             usernameField.clear();
             passwordField.clear();
         } catch (IOException e) {
@@ -95,15 +95,15 @@ public class HelloController {
     }
 
     private void navigateToDashboard(String username) throws IOException {
-        // Ensure this path matches your folder structure in src/main/resources
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo1/dashboard.fxml"));
         Parent root = loader.load();
 
-        // Get the dashboard controller and pass the username
+
         DashboardController controller = loader.getController();
         controller.setUsername(username);
 
-        // Switch the scene
+
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.centerOnScreen();
