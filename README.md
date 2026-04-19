@@ -12,7 +12,8 @@ It also promotes both kindness toward others and self-kindness, supporting emoti
 
 Features: Registry that saves user and a dashboard with a 10 by 3 grid, which generates a random task  and receives feedback if the project is completed, then saves it as files.
 
-Instructions on how to run
+Instructions on how to run:
+https://docs.google.com/document/d/1fDcmD9Hv0-teEDKmGue-EHYq2sLzhIugRgVMbUuRd4I/edit?usp=sharing
 
 Mapping of the 5 lessons used (Lesson → Where Used → Purpose)
 
