@@ -16,6 +16,7 @@ Instructions on how to run:
 https://docs.google.com/document/d/1fDcmD9Hv0-teEDKmGue-EHYq2sLzhIugRgVMbUuRd4I/edit?usp=sharing
 
 Mapping of the 5 lessons used (Lesson → Where Used → Purpose)
+
 __1. Functions with 1D Arrays__
 
 Where Used:
@@ -26,7 +27,7 @@ generateTask() method → tasks[random.nextInt(tasks.length)]
 Purpose:
 The 1D array stores all the kindness tasks in a single list. The function generateTask() accesses this array randomly to display a task to the user. This allows easy management and reuse of multiple task options without hardcoding each one separately.
 
-2. 2D Arrays
+__2. 2D Arrays__
 
 Where Used:
 
@@ -40,7 +41,7 @@ resetProgress()
 Purpose:
 The 2D array represents the 30-day grid (3 rows × 10 columns). Each cell corresponds to a day’s result (Completed/Failed). It helps organize and visually map progress in a structured table format.
 
-3. File Handling (CRUD)
+__3. File Handling (CRUD)__
 
 Where Used:
 
@@ -59,7 +60,7 @@ Allows undo and reset features
 
 This ensures data persistence, meaning progress is not lost after closing the app.
 
-4. CSV File Reading
+__4. CSV File Reading__
 
 Where Used:
 
@@ -74,7 +75,7 @@ Validate login credentials
 
 This makes it easier to parse structured data from a text file.
 
-5. Input Handling and Validation
+__5. Input Handling and Validation__
 
 Where Used:
 
@@ -90,7 +91,7 @@ if (!hasActiveTask)
 if (day >= 30)
 if (day <= 0)
 
-Purpose:
+__Purpose:__
 Ensures the program runs correctly and avoids errors by:
 
 Preventing empty inputs
