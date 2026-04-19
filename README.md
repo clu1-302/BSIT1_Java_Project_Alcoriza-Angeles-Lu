@@ -16,5 +16,88 @@ Instructions on how to run:
 https://docs.google.com/document/d/1fDcmD9Hv0-teEDKmGue-EHYq2sLzhIugRgVMbUuRd4I/edit?usp=sharing
 
 Mapping of the 5 lessons used (Lesson → Where Used → Purpose)
+1. Functions with 1D Arrays
+
+Where Used:
+
+private final String[] tasks (DashboardController)
+generateTask() method → tasks[random.nextInt(tasks.length)]
+
+Purpose:
+The 1D array stores all the kindness tasks in a single list. The function generateTask() accesses this array randomly to display a task to the user. This allows easy management and reuse of multiple task options without hardcoding each one separately.
+
+2. 2D Arrays
+
+Where Used:
+
+private Label[][] cells = new Label[3][10]; (DashboardController)
+Used in:
+initialize() (grid creation)
+updateGridCell()
+loadProgress()
+resetProgress()
+
+Purpose:
+The 2D array represents the 30-day grid (3 rows × 10 columns). Each cell corresponds to a day’s result (Completed/Failed). It helps organize and visually map progress in a structured table format.
+
+3. File Handling (CRUD)
+
+Where Used:
+
+Create: handleRegister() → creates users.txt
+Read: handleLogin(), loadProgress()
+Update: saveProgress() (adds new progress)
+Delete: resetProgress() (deletes progress file), removeLastLineFromFile()
+
+Purpose:
+File handling is used to store and manage user data and progress:
+
+Saves registered users
+Stores task results per user
+Retrieves progress when reopening the app
+Allows undo and reset features
+
+This ensures data persistence, meaning progress is not lost after closing the app.
+
+4. CSV File Reading
+
+Where Used:
+
+handleLogin() → String[] parts = line.split(",");
+
+Purpose:
+The users.txt file is structured like a CSV (username,password).
+CSV reading is used to:
+
+Separate username and password
+Validate login credentials
+
+This makes it easier to parse structured data from a text file.
+
+5. Input Handling and Validation
+
+Where Used:
+
+handleLogin()
+handleRegister()
+completeTask() / failTask()
+undoTask()
+
+Examples:
+
+if (username.isEmpty() || password.isEmpty())
+if (!hasActiveTask)
+if (day >= 30)
+if (day <= 0)
+
+Purpose:
+Ensures the program runs correctly and avoids errors by:
+
+Preventing empty inputs
+Making sure tasks are generated before completing/failing
+Avoiding overflow (more than 30 days)
+Preventing invalid undo actions
+
+This improves user experience and program reliability.
 
 All members listed in the repository
