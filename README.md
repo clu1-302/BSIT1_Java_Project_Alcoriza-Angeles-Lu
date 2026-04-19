@@ -16,7 +16,7 @@ Instructions on how to run:
 https://docs.google.com/document/d/1fDcmD9Hv0-teEDKmGue-EHYq2sLzhIugRgVMbUuRd4I/edit?usp=sharing
 
 Mapping of the 5 lessons used (Lesson → Where Used → Purpose)
-1. Functions with 1D Arrays
+__1. Functions with 1D Arrays__
 
 Where Used:
 
